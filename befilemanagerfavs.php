@@ -49,8 +49,20 @@ class befilemanagerfavs extends BackendModule {
             $text = "<div class='tl_listing_container' style='margin-top:10px'><script>";
             $path = explode(";", $GLOBALS["TL_CONFIG"]['filemanagerFavs']);
             for ($i = 0; $i < count($path); $i++) {
-                $text = $text.'document.write("<div style=\"margin-right:10px;white-space:nowrap;display:inline-block;\"><a href=\""+window.location+"&node='.trim($path[$i]).'\" title=\"Zeige nur Ordner: '.trim($path[$i]).'\">&#10026; '.trim($path[$i]).'</a></div>");';
+                $ordnerbeschreibung = explode("|",trim($path[$i]));
+                $ordner = trim($ordnerbeschreibung[0]);
+                if (count($ordnerbeschreibung)>1) {
+                    $beschreibung = trim($ordnerbeschreibung[1]);
+                } 
+                else {
+                    $beschreibung = $ordner;
+                }
+                if (\BackendUser::getInstance()->hasAccess($ordner, 'filemounts')) {
+                    $text = $text.'document.write("<div style=\"margin-right:10px;white-space:nowrap;display:inline-block;\"><a href=\""+window.location+"&node='.$ordner.'\" title=\"Zeige nur Ordner: '.$ordner.'\">&#10026; '.$beschreibung.'</a></div>");';
+                }
             }
+            
+            
             $text .= "</script></div>";
             //$text .= "document.write(window.location+'&node=".$path[0]."')</script>";
             
