@@ -71,12 +71,11 @@ class befilemanagerfavs extends BackendModule {
                         else {
                             $beschreibung = $ordner; // Beschreibung = Ordnerpfad
                     }
-                    //$jsScriptContent = $jsScriptContent.'document.write("<div style=\"margin-right:10px;white-space:nowrap;display:inline-block;\"><a href=\""+window.location+"&node='.$ordner.'\" title=\"Zeige nur Ordner: '.$ordner.'\">&#10026; '.$beschreibung.'</a></div>");';
+
                     $favorites[$fav][0] = $ordner;
                     $favorites[$fav][1] = $beschreibung;
                     
-                    $favorites[$fav][2] = RequestToken::get();;
-                    //print_r($template->favoritesPath);
+
                     $fav++;
                 }
             }
@@ -85,7 +84,8 @@ class befilemanagerfavs extends BackendModule {
             foreach ($_GET as $key => $value) {
                         $link.= $key."=".$value."&";
             }
-            $link .= "rt=".(RequestToken::get());
+
+            $link .= "rt=".REQUEST_TOKEN;
             $template->link = $link;
             $template->favorites = $favorites;
 
