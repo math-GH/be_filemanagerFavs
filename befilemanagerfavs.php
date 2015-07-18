@@ -82,7 +82,7 @@ class befilemanagerfavs extends BackendModule {
             
             $link = $_SERVER['PHP_SELF']."?";
             foreach ($_GET as $key => $value) {
-                        $link.= $key."=".$value."&";
+                        $link.= $key."=".$value."&amp;";
             }
 
             $link .= "rt=".REQUEST_TOKEN;
