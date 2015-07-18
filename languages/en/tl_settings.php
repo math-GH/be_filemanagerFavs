@@ -34,7 +34,7 @@ if (!defined('TL_ROOT'))
 
 $GLOBALS['TL_LANG']['tl_settings']['filemanagerfavs_legend'] = 'File manager favorites';
 
-$GLOBALS['TL_LANG']['tl_settings']['filemanagerfavs']['favs'] = array("Favorites", "separated by semicolons list. Schema: files/folder/subfolder|optional description; files/anotherSubfolder|optional description;");
+$GLOBALS['TL_LANG']['tl_settings']['filemanagerfavs']['favs'] = array("Favorites", "separated by semicolons list. Schema: files/folder/subfolder|optional description; files/anotherSubfolder|optional description");
 
 
 

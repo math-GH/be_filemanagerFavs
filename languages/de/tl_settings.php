@@ -34,7 +34,7 @@ if (!defined('TL_ROOT'))
 
 $GLOBALS['TL_LANG']['tl_settings']['filemanagerfavs_legend'] = 'Dateimanager Favoriten';
 
-$GLOBALS['TL_LANG']['tl_settings']['filemanagerfavs']['favs'] = array("Favoriten", "Semikolonseparierte Auflistung nach dem Schema: files/Ordner/Unterordner|optionale Beschreibung; files/andererOrdner|optionale Beschreibung;");
+$GLOBALS['TL_LANG']['tl_settings']['filemanagerfavs']['favs'] = array("Favoriten", "Semikolonseparierte Auflistung nach dem Schema: files/Ordner/Unterordner|optionale Beschreibung; files/andererOrdner|optionale Beschreibung");
 
 
 
