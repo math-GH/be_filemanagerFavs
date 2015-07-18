@@ -45,28 +45,60 @@ class befilemanagerfavs extends BackendModule {
     }
     
     function insertFavs($strContent, $strTemplate) {
-        if (($strTemplate == "be_main" && strpos($strContent, "header_new_folder")>0) || ($strTemplate == "be_picker")|| ($strTemplate == "be_files")){
-            $text = "<div class='tl_listing_container' style='margin-top:10px'><script>";
+        if (($strTemplate == "be_main" && $_GET["do"]== "files") || ($strTemplate == "be_picker")|| ($strTemplate == "be_files")){
+            
+            $template = new BackendTemplate('be_filemanagerFavs');
+            $template->lang = (object) $GLOBALS['TL_LANG']['be_filemanagerFavs'];
+
+            
+            
+            // hole die Einstellungen (Format: OrdnerPfad1|Beschreibung1;OrdnerPfad2|Beschreibung2 usw.)
             $path = explode(";", $GLOBALS["TL_CONFIG"]['filemanagerFavs']);
+            $fav = 0;
+            
+            
             for ($i = 0; $i < count($path); $i++) {
-                $ordnerbeschreibung = explode("|",trim($path[$i]));
-                $ordner = trim($ordnerbeschreibung[0]);
-                if (count($ordnerbeschreibung)>1) {
-                    $beschreibung = trim($ordnerbeschreibung[1]);
-                } 
-                else {
-                    $beschreibung = $ordner;
-                }
+                $ordnerbeschreibung = explode("|",trim($path[$i])); // [0] => OrdnerPfad; [1] => optionale Beschreibung
+                $ordner = trim($ordnerbeschreibung[0]); //Leerzeichen vor und nach dem OrdnerPfad entfernen
+                
+                
+                // Pruefen, ob User ueberhaupt Zugriff auf den Ordner hat
                 if (\BackendUser::getInstance()->hasAccess($ordner, 'filemounts')) {
-                    $text = $text.'document.write("<div style=\"margin-right:10px;white-space:nowrap;display:inline-block;\"><a href=\""+window.location+"&node='.$ordner.'\" title=\"Zeige nur Ordner: '.$ordner.'\">&#10026; '.$beschreibung.'</a></div>");';
+                    
+                    if (count($ordnerbeschreibung)>1) { // falls Beschreibung vorhanden ist
+                        $beschreibung = trim($ordnerbeschreibung[1]); // Beschreibung = Beschreibung
+                        } 
+                        else {
+                            $beschreibung = $ordner; // Beschreibung = Ordnerpfad
+                    }
+                    //$jsScriptContent = $jsScriptContent.'document.write("<div style=\"margin-right:10px;white-space:nowrap;display:inline-block;\"><a href=\""+window.location+"&node='.$ordner.'\" title=\"Zeige nur Ordner: '.$ordner.'\">&#10026; '.$beschreibung.'</a></div>");';
+                    $favorites[$fav][0] = $ordner;
+                    $favorites[$fav][1] = $beschreibung;
+                    
+                    $favorites[$fav][2] = RequestToken::get();;
+                    //print_r($template->favoritesPath);
+                    $fav++;
                 }
             }
             
-            
-            $text .= "</script></div>";
+            $link = $_SERVER['PHP_SELF']."?";
+            foreach ($_GET as $key => $value) {
+                        $link.= $key."=".$value."&";
+            }
+            $link .= "rt=".(RequestToken::get());
+            $template->link = $link;
+            $template->favorites = $favorites;
+
+            //$template->content = $jsScriptContent;
+            //$text .= "</script></div>";
             //$text .= "document.write(window.location+'&node=".$path[0]."')</script>";
             
+            
+            $text = $template->parse();
+            
             $strContent = str_replace('<div class="tl_listing_container tree_view" id="tl_listing">', $text.'<div class="tl_listing_container tree_view" id="tl_listing">', $strContent);
+            
+            
             
             return $strContent;
         }

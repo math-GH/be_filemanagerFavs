@@ -3,9 +3,9 @@
 /**
  * Contao Open Source CMS
  * 
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2015
  * 
- * @package Bepiwikcharts
+ * @package befilemanagerfavs
  * @link    http://contao.org
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
@@ -25,6 +25,5 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	//'be_piwikcharts'         => 'system/modules/be_piwikcharts/templates',
-	//'be_piwikcharts_welcome' => 'system/modules/be_piwikcharts/templates',
+	'be_filemanagerFavs'         => 'system/modules/be_filemanagerFavs/templates',
 ));
