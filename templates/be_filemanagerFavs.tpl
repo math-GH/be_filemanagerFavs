@@ -8,7 +8,7 @@
 
 <div class='tl_listing_container' style='margin-top:10px'>
     
-    <ul>
+    <ul style="padding:0px;margin:0px;">
     <?php for($i=0; $i<count($this->favorites); $i++) { ?>
         <li class='favItem'>
             <a href='<?php echo $this->link; ?>&node=<?php echo $this->favorites[$i][0] ?>' title='<?php echo $this->lang->showFolderTitle; ?> <?php echo $this->favorites[$i][0]; ?>'>
