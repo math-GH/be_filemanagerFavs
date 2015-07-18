@@ -96,7 +96,8 @@ class befilemanagerfavs extends BackendModule {
             
             $text = $template->parse();
             
-            $strContent = str_replace('<div class="tl_listing_container tree_view" id="tl_listing">', $text.'<div class="tl_listing_container tree_view" id="tl_listing">', $strContent);
+            $anz = 1;
+            $strContent = str_replace('<div class="tl_listing_container tree_view', $text.'<div class="tl_listing_container tree_view', $strContent, $anz);
             
             
             
