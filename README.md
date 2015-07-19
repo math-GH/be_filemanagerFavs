@@ -1,7 +1,7 @@
 # be_filemanagerFavs
 Contao-Erweiterung: Lesezeichen/Favoriten für den Dateimanager
 
-Contao 2.9 bis 3.4 getestet
+Contao 2.9 bis 3.5 getestet
 
 Einfache Lesezeichenverwaltung für den Dateimanager
 Diese Erweiterung stellt auf einfachen Weg Favoriten/Lesezeichen zu beliebigen Ordnern im Dateimanager bereit. Ermöglicht somit eine schnelle Navigation in komplexen Datei-Ordner-Bäumen.
